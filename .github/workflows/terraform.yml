@@ -44,11 +44,16 @@ jobs:
             
             - name: Terraform Init
               run:
+                # terraform -chdir=infra init \
+                #   -backend-config="bucket=${{ inputs.aws-statefile-s3-bucket }}" \
+                #   -backend-config="key=${{ github.event.repository.name }}" \
+                #   -backend-config="region=${{ inputs.aws-region }}" \
+                #   -backend-config="dynamodb_table=${{ inputs.aws-lock-dynamodb-table }}"
                 terraform -chdir=infra init \
-                  -backend-config="bucket=${{ inputs.aws-statefile-s3-bucket }}" \
-                  -backend-config="key=${{ github.event.repository.name }}" \
-                  -backend-config="region=${{ inputs.aws-region }}" \
-                  -backend-config="dynamodb_table=${{ inputs.aws-lock-dynamodb-table }}"
+                  -backend-config="bucket=mario-maciel-sa-east-1-terraform-statefile" \
+                  -backend-config="key=terraform-infra-pipeline" \
+                  -backend-config="region=sa-east-1" \
+                  -backend-config="dynamodb_table=mario-maciel-sa-east-1-terraform-lock"
 
             - name: Terraform Validate
               run: terraform validate
