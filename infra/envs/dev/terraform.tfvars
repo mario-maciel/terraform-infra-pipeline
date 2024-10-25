@@ -1,1 +1,1 @@
-bucket_name = "dev-sa-east-1-buildrun-video-pipeline"
+bucket_name = "dev-mario-maciel-sa-east-1-buildrun-video-pipeline"
